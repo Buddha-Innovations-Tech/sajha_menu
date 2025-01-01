@@ -9,7 +9,7 @@ from frappe.utils import (
 	escape_html,
 	now
 )
-
+from frappe.config import get_modules_from_all_apps
 
 import frappe.utils
 
@@ -23,10 +23,10 @@ import base64
 
 
 # Create a SocketIO client
-sio = socketio.Client()
+# sio = socketio.Client()
 
 # Connect to the socket server
-sio.connect('https://testsocket.tuna-erp.com')
+# sio.connect('https://testsocket.tuna-erp.com')
 # sio.connect('http://localhost:5400')
 
 
@@ -526,8 +526,8 @@ def getMenu(company):
 			if item is None:
 				data = getSubItem(sub.name)
 				menuData.append({"category_name": category.name,
-								 "toDisplay": True if doc.todisplay == 1 else False,
-								 "sub_categories": [{"subcategory_name": sub.name, "image": sub.image, 'item_cateogry': [data]}]})
+								"toDisplay": True if doc.todisplay == 1 else False,
+								"sub_categories": [{"subcategory_name": sub.name, "image": sub.image, 'item_cateogry': [data]}]})
 			else:
 				data = getSubItem(sub.name)
 
@@ -645,7 +645,7 @@ def get_subcategory(sub_category):
 	if subCategory.todisplay == 1:
 		for ssc in subCategory.ssc:
 			sscData = frappe.get_doc("Super Sub Category",
-									 ssc.ssc_name)
+									ssc.ssc_name)
 			if sscData.todisplay == 1:
 				for item in sscData.item_category:
 					itemCat = frappe.get_doc(
@@ -677,7 +677,7 @@ def get_subcategory_mobile(sub_category):
 	if subCategory.mobile_display == 1:
 		for ssc in subCategory.ssc:
 			sscData = frappe.get_doc("Super Sub Category",
-									 ssc.ssc_name)
+									ssc.ssc_name)
 			if sscData.mobile_display == 1:
 				for item in sscData.item_category:
 					itemCat = frappe.get_doc(
@@ -739,7 +739,7 @@ def get_subcategoryMobile(sub_category):
 	if subCategory.todisplay == 1:
 		for ssc in subCategory.ssc:
 			sscData = frappe.get_doc("Super Sub Category",
-									 ssc.ssc_name)
+									ssc.ssc_name)
 			if sscData.todisplay == 1:
 				for item in sscData.item_category:
 					itemCat = frappe.get_doc(
@@ -797,7 +797,7 @@ def getSubItem(sub_category):
 	if subCategory.todisplay == 1:
 		for ssc in subCategory.ssc:
 			sscData = frappe.get_doc("Super Sub Category",
-									 ssc.ssc_name)
+									ssc.ssc_name)
 			if sscData.todisplay == 1:
 				for item in sscData.item_category:
 					itemCat = frappe.get_doc(
@@ -1316,9 +1316,9 @@ def createCurrentOrder(table_name, orderItem, company):
 	#     }
 	# )
 	# doc.save()
-	if sio.connected:
-		sio.emit(f'{company}_table_refresh')
-	topic = str(company).replace(" ", "-").lower()
+	# if sio.connected:
+	# 	sio.emit(f'{company}_table_refresh')
+	# topic = str(company).replace(" ", "-").lower()
 	# push_service.notify_topic_subscribers(
 	# 	topic_name=topic, message_title="New Order", message_body=f"Order from {table_name}")
 
@@ -1373,8 +1373,6 @@ def createCurrentOrderPOS(table_name, orderItem, company):
 		}
 	)
 	doc.save()
-	if sio.connected:
-		sio.emit(f'{company}_table_refresh')
 	orders = frappe.get_doc("Tables", table_name)
 	new_order = []
 	for curr in orders.current_orders:
@@ -1904,7 +1902,7 @@ def createSalesInvoice(doc):
 						sales_invoice_itm.income_account = default_incm_account
 
 			sales_invoice.insert(ignore_permissions=True, ignore_links=True,
-								 ignore_if_duplicate=True, ignore_mandatory=True)
+								ignore_if_duplicate=True, ignore_mandatory=True)
 
 			table.total_charges = 0.0
 			table.orders = []
@@ -2010,7 +2008,6 @@ def stopremove():
 	user = frappe.session.user
 	roles = frappe.get_roles(user)
 
-	print(roles)
 	required_roles = ['Administrator', 'Restaurant Manager']
 	returnValue = False
 
@@ -2029,7 +2026,6 @@ def stopCancel():
 	user = frappe.session.user
 	roles = frappe.get_roles(user)
 
-	print(roles)
 	required_roles = ['Administrator', 'Tuna Kot']
 	returnValue = False
 
@@ -2075,7 +2071,7 @@ def getCurrentOrders(table):
 		item = getItemRate(current.item_code)
 
 		currentOrders.append({'product': current.item_code, 'name': item['item_name'],
-							  'quantity': current.quantity, 'rate': item['item']})
+							'quantity': current.quantity, 'rate': item['item']})
 	return currentOrders
 
 
@@ -2123,189 +2119,190 @@ Note:
 """
 @frappe.whitelist()
 def moveToRoomFolio(company, table, orderItems, room, split_customer, discount_value):
-	try:
-		orderItems = json.loads(orderItems)
-		todayDate = now()
+	module_exists = "Tuna HMS" in get_modules_from_all_apps()
+	if module_exists:
+		try:
+			orderItems = json.loads(orderItems)
+			todayDate = now()
 
-		room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
-			'=', 'Checked In'], 'check_in': [ '<=', todayDate],'check_out': ['>=', todayDate], 'company': ['like', company], 'room_no': ['=', room]})
+			room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
+				'=', 'Checked In'], 'check_in': [ '<=', todayDate],'check_out': ['>=', todayDate], 'company': ['like', company], 'room_no': ['=', room]})
 
-		if (len(room_folio_list) == 0):
-			frappe.local.response['data'] = 'No room folio found.'
-			return
-		roomFolio = frappe.get_doc("Room Folio HMS", room_folio_list[0])
+			if (len(room_folio_list) == 0):
+				frappe.local.response['data'] = 'No room folio found.'
+				return
+			roomFolio = frappe.get_doc("Room Folio HMS", room_folio_list[0])
 
-		if table:
-			table = frappe.get_doc("Tables", table)
-			kot_bot = table.get('kot_bot')
-			testDoc = frappe.db.get_value("KOT_BOT",{'ticket_name':table.kot_bot[0].ticket_name, 'parenttype': "Sales Invoice"}, "parent")
-			if testDoc is not None:
-				return {"code": "ALREADY_EXISTS", 'invoice': testDoc}
-			orders = []
-			for o in orderItems:
-				item = frappe.db.get_value("Item Price", {'item_code': o['item_code'], 'selling': 1}, [
-					'name', 'item_code', 'price_list_rate', 'item_name', 'uom',], as_dict=True)
-				itemTax = frappe.get_doc("Item", o["item_code"])
-				taxTemplate = None
-				itemCategory = frappe.get_doc(
-					"Sub Category Items", {"item_code": o['item_code']})
-				if len(itemTax.taxes) > 0:
-					taxTemplate = itemTax.taxes[0].item_tax_template
-				orders.append({
-					'item_code': item['item_code'],
-					'item_name': item['item_name'],
-					'qty': o['quantity'],
-					'rate': flt(itemCategory.rate),
-					'amount': flt((o['quantity'] * itemCategory.rate)),
-					'uom': item['uom'],
-					'income_account': "Entertainment Expenses - Y",
-					"description": "Test Description",
-					'bill_item': o['bill_item'] if "bill_item" in o else item['item_name'],
-					"tax_template": taxTemplate
-				})
+			if table:
+				table = frappe.get_doc("Tables", table)
+				kot_bot = table.get('kot_bot')
+				testDoc = frappe.db.get_value("KOT_BOT",{'ticket_name':table.kot_bot[0].ticket_name, 'parenttype': "Sales Invoice"}, "parent")
+				if testDoc is not None:
+					return {"code": "ALREADY_EXISTS", 'invoice': testDoc}
+				orders = []
+				for o in orderItems:
+					item = frappe.db.get_value("Item Price", {'item_code': o['item_code'], 'selling': 1}, [
+						'name', 'item_code', 'price_list_rate', 'item_name', 'uom',], as_dict=True)
+					itemTax = frappe.get_doc("Item", o["item_code"])
+					taxTemplate = None
+					itemCategory = frappe.get_doc(
+						"Sub Category Items", {"item_code": o['item_code']})
+					if len(itemTax.taxes) > 0:
+						taxTemplate = itemTax.taxes[0].item_tax_template
+					orders.append({
+						'item_code': item['item_code'],
+						'item_name': item['item_name'],
+						'qty': o['quantity'],
+						'rate': flt(itemCategory.rate),
+						'amount': flt((o['quantity'] * itemCategory.rate)),
+						'uom': item['uom'],
+						'income_account': "Entertainment Expenses - Y",
+						"description": "Test Description",
+						'bill_item': o['bill_item'] if "bill_item" in o else item['item_name'],
+						"tax_template": taxTemplate
+					})
 
-			sales_order = frappe.new_doc("Sales Order")
-			sales_order.customer = "Sajha Customer" if roomFolio.customer == None else roomFolio.customer
-			if table.get("merged_tables") == None or table.get("merged_tables") == "":
-				sales_order.table_name = table.get("name")
-			else:
-				sales_order.table_name = f"{table.get('name')},{table.get('merged_tables')}"
-			sales_order.due_date = frappe.utils.nowdate()
-			sales_order.company = company
-			sales_order.apply_discount_on = "Net Total"
-			sales_order.status = "Closed"
-			sales_order.discount_amount = discount_value
-			default_incm_account = frappe.db.get_value(
-				"Company", {"name": company}, ['default_income_account'])
-			default_cost_center = frappe.db.get_value(
-				"Company", {"name": company}, ['cost_center'])
-
-			default_taxes_and_charges = frappe.db.get_value("Sales Taxes and Charges Template", {
-				"company": company, "is_default": 1})
-
-			sales_order.taxes_and_charges = default_taxes_and_charges
-			company_sales = frappe.get_doc("Company", company)
-
-			sales_charges = sales_order.append('taxes', {})
-			sales_charges.charge_type = "On Net Total"
-			sales_charges.account_head = f"VAT - {company_sales.abbr}"
-			kot_bot = table.get("kot_bot")
-			for ko in kot_bot:
-				kot_bot_itm = sales_order.append("kot_bot", {})
-				kot_bot_itm.ticket_number = ko.ticket_number
-				kot_bot_itm.ticket_name = ko.ticket_name
-			for o in orders:
-				default_account = None
-				itemAccount = frappe.get_doc("Item", o['item_code'])
-				for itm in itemAccount.item_defaults:
-					if company == itm.company:
-						default_account = itm.income_account
-						break
-				sales_order_itm = sales_order.append('items', {})
-				sales_order_itm.item_code = o['item_code']
-				sales_order_itm.item_name = o['item_name']
-				sales_order_itm.rate = o['rate']
-				sales_order_itm.delivery_date = frappe.utils.nowdate()
-				sales_order_itm.amount = o['amount']
-				sales_order_itm.description = o['description']
-				sales_order_itm.uom = o['uom']
-				sales_order_itm.qty = o['qty']
-				if o['tax_template']:
-					sales_order_itm.item_tax_template = o['tax_template']
-				sales_order_itm.cost_center = default_cost_center
-				if default_account != None:
-					sales_order_itm.income_account = default_account
+				sales_order = frappe.new_doc("Sales Order")
+				sales_order.customer = "Sajha Customer" if roomFolio.customer == None else roomFolio.customer
+				if table.get("merged_tables") == None or table.get("merged_tables") == "":
+					sales_order.table_name = table.get("name")
 				else:
-					sales_order_itm.income_account = default_incm_account
+					sales_order.table_name = f"{table.get('name')},{table.get('merged_tables')}"
+				sales_order.due_date = frappe.utils.nowdate()
+				sales_order.company = company
+				sales_order.apply_discount_on = "Net Total"
+				sales_order.status = "Closed"
+				sales_order.discount_amount = discount_value
+				default_incm_account = frappe.db.get_value(
+					"Company", {"name": company}, ['default_income_account'])
+				default_cost_center = frappe.db.get_value(
+					"Company", {"name": company}, ['cost_center'])
 
-			sales_order.insert()
-			sales_order.submit()
+				default_taxes_and_charges = frappe.db.get_value("Sales Taxes and Charges Template", {
+					"company": company, "is_default": 1})
 
-			sales_invoice = frappe.new_doc('Sales Invoice')
-			if roomFolio.split_bill == 1:
-				sales_invoice.customer = split_customer
-			else:
-				sales_invoice.customer = roomFolio.customer
-			sales_invoice.table_name = table.get('name')
-			sales_invoice.due_date = frappe.utils.nowdate()
-			sales_invoice.company = company
-			sales_invoice.apply_discount_on = "Net Total"
-			sales_invoice.discount_amount = discount_value
-			sales_invoice.update_stock = 1
+				sales_order.taxes_and_charges = default_taxes_and_charges
+				company_sales = frappe.get_doc("Company", company)
 
-			default_taxes_and_charges = frappe.db.get_value("Sales Taxes and Charges Template", {
-				"company": table.get("company"), "is_default": 1})
-			default_incm_account = frappe.db.get_value(
-				"Company", {"name": company}, ['default_income_account'])
-			default_cost_center = frappe.db.get_value(
-				"Company", {"name": company}, ['cost_center'])
+				sales_charges = sales_order.append('taxes', {})
+				sales_charges.charge_type = "On Net Total"
+				sales_charges.account_head = f"VAT - {company_sales.abbr}"
+				kot_bot = table.get("kot_bot")
+				for ko in kot_bot:
+					kot_bot_itm = sales_order.append("kot_bot", {})
+					kot_bot_itm.ticket_number = ko.ticket_number
+					kot_bot_itm.ticket_name = ko.ticket_name
+				for o in orders:
+					default_account = None
+					itemAccount = frappe.get_doc("Item", o['item_code'])
+					for itm in itemAccount.item_defaults:
+						if company == itm.company:
+							default_account = itm.income_account
+							break
+					sales_order_itm = sales_order.append('items', {})
+					sales_order_itm.item_code = o['item_code']
+					sales_order_itm.item_name = o['item_name']
+					sales_order_itm.rate = o['rate']
+					sales_order_itm.delivery_date = frappe.utils.nowdate()
+					sales_order_itm.amount = o['amount']
+					sales_order_itm.description = o['description']
+					sales_order_itm.uom = o['uom']
+					sales_order_itm.qty = o['qty']
+					if o['tax_template']:
+						sales_order_itm.item_tax_template = o['tax_template']
+					sales_order_itm.cost_center = default_cost_center
+					if default_account != None:
+						sales_order_itm.income_account = default_account
+					else:
+						sales_order_itm.income_account = default_incm_account
 
-			sales_invoice.taxes_and_charges = default_taxes_and_charges
+				sales_order.insert()
+				sales_order.submit()
 
-			company = frappe.get_doc("Company", table.get('company'))
-
-			restaurantName = frappe.get_doc(
-				"Restaurant names", table.get("restaurant_names"))
-			sales_invoice.naming_series = restaurantName.naming_series
-
-			for ko in kot_bot:
-				kot_bot_itm = sales_invoice.append("kot_bot", {})
-				kot_bot_itm.ticket_number = ko.ticket_number
-				kot_bot_itm.ticket_name = ko.ticket_name
-
-
-			sales_charges = sales_invoice.append('taxes', {})
-			sales_charges.charge_type = "On Net Total"
-			sales_charges.account_head = f"VAT - {company.abbr}"
-
-			for o in orders:
-				default_account = None
-				itemAccount = frappe.get_doc("Item", o['item_code'])
-				for itm in itemAccount.item_defaults:
-					if company.get('name') == itm.company:
-						default_account = itm.income_account
-						break
-				sales_invoice_itm = sales_invoice.append('items', {})
-				sales_invoice_itm.item_code = o['item_code']
-				sales_invoice_itm.item_name = o['item_name']
-				sales_invoice_itm.rate = o['rate']
-				sales_invoice_itm.amount = o['amount']
-				sales_invoice_itm.description = o['description']
-				sales_invoice_itm.uom = o['uom']
-				sales_invoice_itm.qty = o['qty']
-				sales_invoice_itm.bill_item_name = o['bill_item']
-				if o['tax_template']:
-					sales_invoice_itm.item_tax_template = o['tax_template']
-				sales_invoice_itm.cost_center = default_cost_center
-				if default_account != None:
-					sales_invoice_itm.income_account = default_account
+				sales_invoice = frappe.new_doc('Sales Invoice')
+				if roomFolio.split_bill == 1:
+					sales_invoice.customer = split_customer
 				else:
-					sales_invoice_itm.income_account = default_incm_account
+					sales_invoice.customer = roomFolio.customer
+				sales_invoice.table_name = table.get('name')
+				sales_invoice.due_date = frappe.utils.nowdate()
+				sales_invoice.company = company
+				sales_invoice.apply_discount_on = "Net Total"
+				sales_invoice.discount_amount = discount_value
+				sales_invoice.update_stock = 1
 
-			sales_invoice.insert()
-	except Exception as e:
-		frappe.log_error(frappe.get_traceback(), f"{e}")
-		raise
-	try:
-		sales_invoice.submit()
-		frappe.db.set_value('Sales Order', sales_order.get('name'), 'sales_invoice_reference', sales_invoice.get('name'))
-		roomFolioInvoice = roomFolio.append('restrurant_invoice', {})
+				default_taxes_and_charges = frappe.db.get_value("Sales Taxes and Charges Template", {
+					"company": table.get("company"), "is_default": 1})
+				default_incm_account = frappe.db.get_value(
+					"Company", {"name": company}, ['default_income_account'])
+				default_cost_center = frappe.db.get_value(
+					"Company", {"name": company}, ['cost_center'])
 
-		roomFolioInvoice.reference = sales_invoice.name
+				sales_invoice.taxes_and_charges = default_taxes_and_charges
 
-		roomFolio.save()
+				company = frappe.get_doc("Company", table.get('company'))
 
-		table.orders = []
-		table.kot_bot = []
-		table.total_charges = 0.0
-		table.merged_tables = None
-		table.save()
-		if sio.connected:
-			sio.emit(f'{company.get("name")}_table_refresh')
-		return sales_invoice
-	except Exception as e:
-		frappe.log_error(frappe.get_traceback(), f"{e}")
+				restaurantName = frappe.get_doc(
+					"Restaurant names", table.get("restaurant_names"))
+				sales_invoice.naming_series = restaurantName.naming_series
 
+				for ko in kot_bot:
+					kot_bot_itm = sales_invoice.append("kot_bot", {})
+					kot_bot_itm.ticket_number = ko.ticket_number
+					kot_bot_itm.ticket_name = ko.ticket_name
+
+
+				sales_charges = sales_invoice.append('taxes', {})
+				sales_charges.charge_type = "On Net Total"
+				sales_charges.account_head = f"VAT - {company.abbr}"
+
+				for o in orders:
+					default_account = None
+					itemAccount = frappe.get_doc("Item", o['item_code'])
+					for itm in itemAccount.item_defaults:
+						if company.get('name') == itm.company:
+							default_account = itm.income_account
+							break
+					sales_invoice_itm = sales_invoice.append('items', {})
+					sales_invoice_itm.item_code = o['item_code']
+					sales_invoice_itm.item_name = o['item_name']
+					sales_invoice_itm.rate = o['rate']
+					sales_invoice_itm.amount = o['amount']
+					sales_invoice_itm.description = o['description']
+					sales_invoice_itm.uom = o['uom']
+					sales_invoice_itm.qty = o['qty']
+					sales_invoice_itm.bill_item_name = o['bill_item']
+					if o['tax_template']:
+						sales_invoice_itm.item_tax_template = o['tax_template']
+					sales_invoice_itm.cost_center = default_cost_center
+					if default_account != None:
+						sales_invoice_itm.income_account = default_account
+					else:
+						sales_invoice_itm.income_account = default_incm_account
+
+				sales_invoice.insert()
+		except Exception as e:
+			frappe.log_error(frappe.get_traceback(), f"{e}")
+			raise
+		try:
+			sales_invoice.submit()
+			frappe.db.set_value('Sales Order', sales_order.get('name'), 'sales_invoice_reference', sales_invoice.get('name'))
+			roomFolioInvoice = roomFolio.append('restrurant_invoice', {})
+
+			roomFolioInvoice.reference = sales_invoice.name
+
+			roomFolio.save()
+
+			table.orders = []
+			table.kot_bot = []
+			table.total_charges = 0.0
+			table.merged_tables = None
+			table.save()
+			return sales_invoice
+		except Exception as e:
+			frappe.log_error(frappe.get_traceback(), f"{e}")
+	else:
+		pass
 """
 Update stock entry for a given quantity, default warehouse, item code, company, and stock entry type.
 
@@ -2750,8 +2747,6 @@ def createSalesInvoicePOS(company, customer,multi_payment, createLateSales, writ
 		table.total_charges = 0.0
 		table.merged_tables = None
 		table.save()
-	if sio.connected:
-		sio.emit(f'{ company.get("name") if createLateSales == False else company}_table_refresh')
 	frappe.db.commit()
 	if createLateSales == False:
 		return sales_invoice.name
@@ -2776,8 +2771,6 @@ def clearTablePOS(table):
 			table.total_charges = 0.0
 			table.merged_tables = None
 			table.save()
-			if sio.connected:
-				sio.emit(f'{table.get("company")}_table_refresh')
 			return {"code": "SUCCESS"}
 
 
@@ -2804,15 +2797,18 @@ Note:
 """
 @frappe.whitelist()
 def getOccupiedRooms(company):
-	rooms = frappe.get_list(
-		'Room HMS', filters={'status': 'Occupied', 'company': company})
-	for room in rooms:
-		room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
-			'=', 'Checked In'], 'room_no': ['=', room.name]})
-		room['roomFolio'] = frappe.get_doc(
-			"Room Folio HMS", room_folio_list[0])
-	return rooms
-
+	module_exists = "Tuna HMS" in get_modules_from_all_apps()
+	if module_exists:
+		rooms = frappe.get_list(
+			'Room HMS', filters={'status': 'Occupied', 'company': company})
+		for room in rooms:
+			room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
+				'=', 'Checked In'], 'room_no': ['=', room.name]})
+			room['roomFolio'] = frappe.get_doc(
+				"Room Folio HMS", room_folio_list[0])
+		return rooms
+	else:
+		pass
 
 """
 Get room folio data for a given room.
@@ -2843,14 +2839,16 @@ Note:
 """
 @frappe.whitelist()
 def getRoomFolioData(room):
-	room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
-		'=', 'Checked In'], 'room_no': ['=', room]})
-	roomFolio = frappe.get_doc("Room Folio HMS", room_folio_list[0])
+	module_exists = "Tuna HMS" in get_modules_from_all_apps()
+	if module_exists:
+		room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
+			'=', 'Checked In'], 'room_no': ['=', room]})
+		roomFolio = frappe.get_doc("Room Folio HMS", room_folio_list[0])
 
-	if roomFolio.split_bill == 1:
-		return roomFolio.split_bill_customer
-	else:
-		return roomFolio.customer
+		if roomFolio.split_bill == 1:
+			return roomFolio.split_bill_customer
+		else:
+			return roomFolio.customer
 
 
 """
@@ -2877,14 +2875,16 @@ Note:
 """
 @frappe.whitelist()
 def getUserRoomDetail(customer):
-	doc = frappe.get_list(doctype="Room Folio HMS", filters={
-		"customer": customer, "status": "Checked In"})
-	item = {"customerName": "", "rooms": []}
-	item['customerName'] = customer
-	for room in doc:
-		data = frappe.get_doc("Room Folio HMS", room.name)
-		item['rooms'].append(data.room_no)
-	return item
+	module_exists = "Tuna HMS" in get_modules_from_all_apps()
+	if module_exists:
+		doc = frappe.get_list(doctype="Room Folio HMS", filters={
+			"customer": customer, "status": "Checked In"})
+		item = {"customerName": "", "rooms": []}
+		item['customerName'] = customer
+		for room in doc:
+			data = frappe.get_doc("Room Folio HMS", room.name)
+			item['rooms'].append(data.room_no)
+		return item
 
 """
 Get take order data for a given company.

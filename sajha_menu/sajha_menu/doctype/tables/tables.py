@@ -215,7 +215,7 @@ def create_sales(doc, index):
                     sales_invoice_itm.income_account = default_incm_account
 
         sales_invoice.insert(ignore_permissions=True, ignore_links=True,
-                             ignore_if_duplicate=True, ignore_mandatory=True)
+                                ignore_if_duplicate=True, ignore_mandatory=True)
 
         table.split_bill_customer[int(index)].invoice_status = "Done"
 
@@ -262,117 +262,117 @@ Returns:
 Example:
     moveToRoomFolio('{"name": "Table 1", "room_folio": "Room 123", "move_to_room": 1, "room_customer": "John Doe", "orders": [{"item": "Item 1", "quantity": 2}, {"item": "Item 2", "quantity": 3}]}', 1)
 """
-@frappe.whitelist()
-def moveToRoomFolio(doc, index):
-    doc = json.loads(doc)
-    index = int(index)
-    roomFolio = frappe.get_doc("Room Folio HMS", doc.get('room_folio'))
-    table = frappe.get_doc("Tables", doc.get('name'))
-    if doc.get("name"):
-        orders = []
-        orderItems = doc['orders']
-        splitRatio = 0.0
+# @frappe.whitelist()
+# def moveToRoomFolio(doc, index):
+#     doc = json.loads(doc)
+#     index = int(index)
+#     roomFolio = frappe.get_doc("Room Folio HMS", doc.get('room_folio'))
+#     table = frappe.get_doc("Tables", doc.get('name'))
+#     if doc.get("name"):
+#         orders = []
+#         orderItems = doc['orders']
+#         splitRatio = 0.0
 
-        if index != -1:
-            splitCustomer = doc.get("split_bill_customer")
-            totalCharges = doc.get('total_charges')
-            splitRatio = splitCustomer[int(index)]['bill_amount']/totalCharges
+#         if index != -1:
+#             splitCustomer = doc.get("split_bill_customer")
+#             totalCharges = doc.get('total_charges')
+#             splitRatio = splitCustomer[int(index)]['bill_amount']/totalCharges
 
-        for o in orderItems:
-            item = frappe.db.get_value("Item Price", {'item_code': o['item'], 'selling': 1}, [
-                'name', 'item_code', 'price_list_rate', 'item_name', 'uom',], as_dict=True)
-            itemTax = frappe.get_doc("Item", o["item"])
-            taxTemplate = None
-            if len(itemTax.taxes) > 0:
-                taxTemplate = itemTax.taxes[0].item_tax_template
-            orders.append({
-                'item_code': item['item_code'],
-                'item_name': item['item_name'],
-                'qty': o['quantity'],
-                'rate': flt(item['price_list_rate']) if index == -1 else flt(item['price_list_rate'] * splitRatio, 3),
-                'amount': flt((o['quantity'] * item['price_list_rate'])) if index == -1 else flt((o['quantity'] * item['price_list_rate']) * splitRatio, 3),
-                'uom': item['uom'],
-                'income_account': "Entertainment Expenses - Y",
-                "description": "Test Description",
-                "tax_template": taxTemplate
-            })
+#         for o in orderItems:
+#             item = frappe.db.get_value("Item Price", {'item_code': o['item'], 'selling': 1}, [
+#                 'name', 'item_code', 'price_list_rate', 'item_name', 'uom',], as_dict=True)
+#             itemTax = frappe.get_doc("Item", o["item"])
+#             taxTemplate = None
+#             if len(itemTax.taxes) > 0:
+#                 taxTemplate = itemTax.taxes[0].item_tax_template
+#             orders.append({
+#                 'item_code': item['item_code'],
+#                 'item_name': item['item_name'],
+#                 'qty': o['quantity'],
+#                 'rate': flt(item['price_list_rate']) if index == -1 else flt(item['price_list_rate'] * splitRatio, 3),
+#                 'amount': flt((o['quantity'] * item['price_list_rate'])) if index == -1 else flt((o['quantity'] * item['price_list_rate']) * splitRatio, 3),
+#                 'uom': item['uom'],
+#                 'income_account': "Entertainment Expenses - Y",
+#                 "description": "Test Description",
+#                 "tax_template": taxTemplate
+#             })
 
-        sales_invoice = frappe.new_doc('Sales Invoice')
-        if index != -1:
-            sales_invoice.customer = table.split_bill_customer[int(
-                index)].customer
-        else:
-            if doc.get('move_to_room') == 1:
-                if doc.get('room_customer') == None or doc.get('room_customer') == '':
-                    sales_invoice.customer = roomFolio.customer
-                else:
-                    sales_invoice.customer = doc.get('room_customer')
+#         sales_invoice = frappe.new_doc('Sales Invoice')
+#         if index != -1:
+#             sales_invoice.customer = table.split_bill_customer[int(
+#                 index)].customer
+#         else:
+#             if doc.get('move_to_room') == 1:
+#                 if doc.get('room_customer') == None or doc.get('room_customer') == '':
+#                     sales_invoice.customer = roomFolio.customer
+#                 else:
+#                     sales_invoice.customer = doc.get('room_customer')
 
-        sales_invoice.table_name = doc.get("name")
-        sales_invoice.due_date = frappe.utils.nowdate()
+#         sales_invoice.table_name = doc.get("name")
+#         sales_invoice.due_date = frappe.utils.nowdate()
 
-        default_incm_account = frappe.db.get_value(
-            "Company", {"name": doc.get("company")}, ['default_income_account'])
-        default_cost_center = frappe.db.get_value(
-            "Company", {"name": doc.get("company")}, ['cost_center'])
+#         default_incm_account = frappe.db.get_value(
+#             "Company", {"name": doc.get("company")}, ['default_income_account'])
+#         default_cost_center = frappe.db.get_value(
+#             "Company", {"name": doc.get("company")}, ['cost_center'])
 
-        for o in orders:
-            if o['qty'] > 0:
-                default_account = None
-                itemAccount = frappe.get_doc("Item", o['item_code'])
-                for itm in itemAccount.item_defaults:
-                    if doc.get('company') == itm.company:
-                        default_account = itm.income_account
-                        break
-                sales_invoice_itm = sales_invoice.append('items', {})
-                sales_invoice_itm.item_code = o['item_code']
-                sales_invoice_itm.item_name = o['item_name']
-                sales_invoice_itm.rate = o['rate']
-                sales_invoice_itm.amount = o['amount']
-                sales_invoice_itm.description = o['description']
-                sales_invoice_itm.uom = o['uom']
-                sales_invoice_itm.qty = o['qty']
-                if o['tax_template']:
-                    sales_invoice_itm.item_tax_template = o['tax_template']
-                sales_invoice_itm.cost_center = default_cost_center
-                if default_account != None:
-                    sales_invoice_itm.income_account = default_account
-                else:
-                    sales_invoice_itm.income_account = default_incm_account
+#         for o in orders:
+#             if o['qty'] > 0:
+#                 default_account = None
+#                 itemAccount = frappe.get_doc("Item", o['item_code'])
+#                 for itm in itemAccount.item_defaults:
+#                     if doc.get('company') == itm.company:
+#                         default_account = itm.income_account
+#                         break
+#                 sales_invoice_itm = sales_invoice.append('items', {})
+#                 sales_invoice_itm.item_code = o['item_code']
+#                 sales_invoice_itm.item_name = o['item_name']
+#                 sales_invoice_itm.rate = o['rate']
+#                 sales_invoice_itm.amount = o['amount']
+#                 sales_invoice_itm.description = o['description']
+#                 sales_invoice_itm.uom = o['uom']
+#                 sales_invoice_itm.qty = o['qty']
+#                 if o['tax_template']:
+#                     sales_invoice_itm.item_tax_template = o['tax_template']
+#                 sales_invoice_itm.cost_center = default_cost_center
+#                 if default_account != None:
+#                     sales_invoice_itm.income_account = default_account
+#                 else:
+#                     sales_invoice_itm.income_account = default_incm_account
 
-        sales_invoice.insert(ignore_permissions=True, ignore_links=True,
-                             ignore_if_duplicate=True, ignore_mandatory=True)
+#         sales_invoice.insert(ignore_permissions=True, ignore_links=True,
+#                              ignore_if_duplicate=True, ignore_mandatory=True)
 
-        roomFolioInvoice = roomFolio.append('restrurant_invoice', {})
+#         roomFolioInvoice = roomFolio.append('restrurant_invoice', {})
 
-        roomFolioInvoice.reference = sales_invoice.name
+#         roomFolioInvoice.reference = sales_invoice.name
 
-        roomFolio.save()
+#         roomFolio.save()
 
-        if index != -1:
-            pendingBills = False
-            table.split_bill_customer[int(index)].invoice_status = "Done"
-            table.save()
-            for tab in table.get('split_bill_customer'):
-                if tab.invoice_status == "Pending":
-                    pendingBills = True
-                    break
-                else:
-                    pendingBills = False
+#         if index != -1:
+#             pendingBills = False
+#             table.split_bill_customer[int(index)].invoice_status = "Done"
+#             table.save()
+#             for tab in table.get('split_bill_customer'):
+#                 if tab.invoice_status == "Pending":
+#                     pendingBills = True
+#                     break
+#                 else:
+#                     pendingBills = False
 
-            if pendingBills:
-                return sales_invoice.name
-            else:
-                table.orders = []
-                table.split_bill_customer = []
-                table.split_bill = 0
-                table.total_charges = 0.0
-        else:
-            table.orders = []
-            table.total_charges = 0.0
+#             if pendingBills:
+#                 return sales_invoice.name
+#             else:
+#                 table.orders = []
+#                 table.split_bill_customer = []
+#                 table.split_bill = 0
+#                 table.total_charges = 0.0
+#         else:
+#             table.orders = []
+#             table.total_charges = 0.0
 
-        table.save()
-        return sales_invoice.name
+#         table.save()
+#         return sales_invoice.name
 
 """
 This function filters and retrieves a list of room folios based on the provided filters.
@@ -396,21 +396,21 @@ Returns:
 Example:
     room_folio_fltr("Room Folio HMS", "123", "name", 0, 10, {"status": "Open", "category": "Room", "company": "ABC Corp", "room_no": "101"})
 """
-@frappe.whitelist()
-def room_folio_fltr(doctype, txt, searchfield, start, page_len, filters):
-    status = filters['status']
-    if filters['category'] == "Room":
-        room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
-            '=', status], 'company': ['like', filters['company']], 'room_no': ['=', filters['room_no']]})
-    else:
-        room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
-            '=', status], 'company': ['like', filters['company']], 'room_no': ['=', filters['room_number']]})
-    available_folio = []
+# @frappe.whitelist()
+# def room_folio_fltr(doctype, txt, searchfield, start, page_len, filters):
+#     status = filters['status']
+#     if filters['category'] == "Room":
+#         room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
+#             '=', status], 'company': ['like', filters['company']], 'room_no': ['=', filters['room_no']]})
+#     else:
+#         room_folio_list = frappe.db.get_list('Room Folio HMS', filters={'status': [
+#             '=', status], 'company': ['like', filters['company']], 'room_no': ['=', filters['room_number']]})
+#     available_folio = []
 
-    for rc in room_folio_list:
-        available_folio.append([rc.name])
+#     for rc in room_folio_list:
+#         available_folio.append([rc.name])
 
-    return tuple(available_folio)
+#     return tuple(available_folio)
 
 """
 This function retrieves the split bill customers for a given room folio.
@@ -424,10 +424,10 @@ Returns:
 Example:
     splitCustomer('Room 123')
 """
-@frappe.whitelist()
-def splitCustomer(roomFolio):
-    doc = frappe.get_doc("Room Folio HMS", roomFolio)
-    if doc.split_bill == 1:
-        return doc.split_bill_customer
-    else:
-        return "no-split-bill"
+# @frappe.whitelist()
+# def splitCustomer(roomFolio):
+#     doc = frappe.get_doc("Room Folio HMS", roomFolio)
+#     if doc.split_bill == 1:
+#         return doc.split_bill_customer
+#     else:
+#         return "no-split-bill"
