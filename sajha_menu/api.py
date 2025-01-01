@@ -1684,8 +1684,7 @@ def getTableDetails(table):
 	table = frappe.get_doc("Tables", table)
 	orders = []
 	for order in table.orders:
-		item = frappe.db.get_value("Item Price", {'item_code': order.item, 'selling': 1}, [
-			'name', 'item_code', 'item_name', 'price_list_rate'], as_dict=1)
+		item = frappe.db.get_value("Item", order.item, ['name', 'item_code', 'item_name'], as_dict=1)
 		itemTax = frappe.get_doc("Item", order.item)
 		itemCategory = frappe.get_doc(
 			"Sub Category Items", {"item_code": order.item})
