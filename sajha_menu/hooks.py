@@ -109,6 +109,8 @@ doctype_js ={
 #     }
 # }
 
+after_migrate = ['sajha_menu.migration.create_custom_perm']
+
 doc_events = {
     "Sales Invoice": {
         "before_save": "sajha_menu.api.clearDumpDataSalesInvoiceBeforeSave",
