@@ -1,0 +1,99 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:company",
+ "creation": "2023-04-21 14:40:23.040794",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "section_break_2",
+  "food_ip",
+  "food_port",
+  "column_break_4",
+  "bar_ip",
+  "bar_port",
+  "column_break_6",
+  "counter_ip",
+  "counter_port"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company Name",
+   "options": "Company",
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "food_ip",
+   "fieldtype": "Data",
+   "label": "Food IP"
+  },
+  {
+   "default": "9100",
+   "fieldname": "food_port",
+   "fieldtype": "Int",
+   "label": "Food Port",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bar_ip",
+   "fieldtype": "Data",
+   "label": "Bar IP"
+  },
+  {
+   "default": "9100",
+   "fieldname": "bar_port",
+   "fieldtype": "Int",
+   "label": "Bar Port",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "counter_ip",
+   "fieldtype": "Data",
+   "label": "Counter IP"
+  },
+  {
+   "default": "9100",
+   "fieldname": "counter_port",
+   "fieldtype": "Int",
+   "label": "Counter Port",
+   "non_negative": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-04-21 14:42:30.574168",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Printers",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

@@ -1,0 +1,116 @@
+{
+ "cards_label": "Data",
+ "category": "Modules",
+ "charts": [],
+ "creation": "2022-12-30 15:49:18.082241",
+ "developer_mode_only": 0,
+ "disable_user_customization": 0,
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "icon": "sell",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "label": "Sajha Menu",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Orders",
+   "link_to": "Kitchen Orders",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Tables",
+   "link_to": "Tables",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Category",
+   "link_to": "Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sub Category",
+   "link_to": "Sub Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Super Sub Category",
+   "link_to": "Super Sub Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Item Category",
+   "link_to": "Item Category",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Waiter Profile",
+   "link_to": "Waiter Profile",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2023-10-09 13:14:15.158214",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Sajha Menu",
+ "onboarding": "",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 0,
+ "shortcuts": [
+  {
+   "doc_view": "Dashboard",
+   "label": "Kitchen Orders",
+   "link_to": "kitchen-order",
+   "type": "Page"
+  },
+  {
+   "doc_view": "Dashboard",
+   "label": "Bar Orders",
+   "link_to": "bar-order",
+   "type": "Page"
+  },
+  {
+   "doc_view": "Dashboard",
+   "label": "Tables",
+   "link_to": "table-order",
+   "type": "Page"
+  },
+  {
+   "doc_view": "Dashboard",
+   "label": "Sajha Menu Settings",
+   "link_to": "Sajha Menu Settings",
+   "type": "DocType"
+  }
+ ]
+}

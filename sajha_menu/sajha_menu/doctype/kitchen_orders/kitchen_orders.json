@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-01-01 12:12:28.647934",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "table_name",
+  "order_number",
+  "created_date",
+  "company",
+  "kot_id",
+  "items",
+  "remark",
+  "status",
+  "kot_status"
+ ],
+ "fields": [
+  {
+   "fieldname": "table_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Table Name",
+   "options": "Tables",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "kot_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "KOT ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Food Child"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending\nIn Process\nDone"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_global_search": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "created_date",
+   "fieldtype": "Date",
+   "label": "Created Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kot_status",
+   "fieldtype": "Select",
+   "label": "KOT Status",
+   "options": "\nEdited\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "order_number",
+   "fieldtype": "Link",
+   "label": "Delivery Order Number",
+   "options": "Home Delivery Orders",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-08-02 11:26:12.541497",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Kitchen Orders",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

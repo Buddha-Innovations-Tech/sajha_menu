@@ -1,0 +1,54 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:menu_name",
+ "creation": "2023-06-28 12:30:38.320834",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "menu_name",
+  "items_needed"
+ ],
+ "fields": [
+  {
+   "fieldname": "menu_name",
+   "fieldtype": "Link",
+   "label": "Menu Name",
+   "options": "Item",
+   "unique": 1
+  },
+  {
+   "fieldname": "items_needed",
+   "fieldtype": "Table",
+   "label": "Items needed",
+   "options": "Pre prep items"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-06-28 12:48:13.863309",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Menu List",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

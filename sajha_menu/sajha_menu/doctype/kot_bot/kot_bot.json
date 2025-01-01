@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-19 13:00:43.359994",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "ticket_number",
+  "ticket_name",
+  "is_split"
+ ],
+ "fields": [
+  {
+   "fieldname": "ticket_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Ticket number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ticket_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Ticket  Name",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_split",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Split"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-12-14 17:59:08.030045",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "KOT_BOT",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

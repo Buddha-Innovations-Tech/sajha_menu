@@ -1,0 +1,111 @@
+/* ../../../../../tmp/tmp-1717-il3hH8TjxgUm/sajha_menu/sajha_menu/public/css/style.bundle.css */
+.kitchenOrders {
+  background: white;
+  padding: 0.5rem 0;
+  min-height: 100vh;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+.kitchenOrdersDark {
+  background: black;
+  padding: 0.5rem 0;
+  min-height: 100vh;
+  margin: 0;
+  margin-top: 0.5rem;
+}
+.kotWrapper {
+  border: 1px solid #e4e4e4;
+  border-radius: 6px;
+}
+.kotWrapper .titleWrapper {
+  border-radius: 6px 6px 0 0;
+  margin-bottom: 0.7rem;
+}
+.kotWrapper .titleWrapper .tableHeader {
+  padding: 8px 10px;
+  padding-bottom: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.kotWrapper .titleWrapper .tableHeader-kotnum {
+  color: white;
+}
+.kotWrapper .titleWrapper .tableHeader h3 {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+}
+.kotWrapper .titleWrapper-status {
+  margin-left: 0.7rem;
+  padding-bottom: 0.5rem;
+  color: #ffffff;
+}
+.kotWrapper-total {
+  padding: 0.2rem 0.5rem;
+  font-size: 15px;
+  color: #2c2c2c;
+  display: flex;
+  justify-content: space-between;
+}
+.kotWrapper-total-title {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.kotWrapper-total-count {
+  font-weight: 700;
+  padding-right: 1rem;
+  font-size: 18px;
+}
+.kotPending {
+  background: #ff7268;
+}
+.kotProgress {
+  background: #eca841;
+}
+.kotDone {
+  background: #60c768;
+}
+.kotCancelled {
+  background: #5f5f5f;
+}
+.edited {
+  margin-left: 0.5rem;
+  color: #a5a5a5;
+}
+.tableWrapper {
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+.tableWrapper-title {
+  position: relative;
+}
+.tableWrapper-title .occupiedTable {
+  position: absolute;
+  height: 1rem;
+  width: 1rem;
+  background: #000;
+  top: 0;
+  right: 0;
+  background: green;
+  border-radius: calc(1rem);
+}
+.tableWrapper-current {
+  background: #ffe0a7;
+  color: #ce8600;
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 40px;
+  font-weight: 500;
+}
+.tableWrapper-billable {
+  background: #baffba;
+  color: green;
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 40px;
+  font-weight: 500;
+}
+/*# sourceMappingURL=style.bundle.M26JUN5Z.css.map */

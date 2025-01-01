@@ -1,0 +1,108 @@
+{
+ "actions": [],
+ "autoname": "format: ORDER-{MM}-{DD}-{YY}-{#####}",
+ "creation": "2023-05-18 12:32:10.442721",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "email",
+  "company",
+  "sales_invoice_reference",
+  "username",
+  "ticket_created",
+  "delivery_items",
+  "status",
+  "created_date",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fetch_from": "email.full_name",
+   "fieldname": "username",
+   "fieldtype": "Data",
+   "label": "Username"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Email",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_items",
+   "fieldtype": "Table",
+   "label": "Delivery Items",
+   "options": "Delivery Items",
+   "reqd": 1
+  },
+  {
+   "fieldname": "created_date",
+   "fieldtype": "Date",
+   "label": "Created Date"
+  },
+  {
+   "default": "Order Received",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Order Received\nOrder Confirmed\nOrder Delivered\nOrder Cancelled",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "ticket_created",
+   "fieldtype": "Check",
+   "label": "Ticket Created",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sales_invoice_reference",
+   "fieldtype": "Link",
+   "label": "Sales Invoice Reference",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Home Delivery Orders",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-07-03 17:50:19.721054",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Home Delivery Orders",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

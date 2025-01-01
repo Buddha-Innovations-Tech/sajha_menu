@@ -1,0 +1,150 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:hall_type_code",
+ "creation": "2023-06-13 15:36:29.666469",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "hall_type_code",
+  "image",
+  "hall_name",
+  "hall_type_name",
+  "status",
+  "description",
+  "column_break_z6k6u",
+  "company",
+  "capacity",
+  "price",
+  "shape",
+  "area",
+  "section_break_lgwfh",
+  "wifi",
+  "parking",
+  "facilities",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "hall_type_code",
+   "fieldtype": "Data",
+   "label": "Hall Type Code",
+   "unique": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image"
+  },
+  {
+   "fieldname": "hall_name",
+   "fieldtype": "Data",
+   "label": "Hall Name"
+  },
+  {
+   "fieldname": "hall_type_name",
+   "fieldtype": "Link",
+   "label": "Hall Item",
+   "options": "Item"
+  },
+  {
+   "default": "Available",
+   "fieldname": "status",
+   "fieldtype": "Link",
+   "label": "status",
+   "options": "Hall Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Long Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "column_break_z6k6u",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "capacity",
+   "fieldtype": "Int",
+   "label": "Capacity of people"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "label": "Price",
+   "read_only": 1
+  },
+  {
+   "fieldname": "shape",
+   "fieldtype": "Data",
+   "label": "Shape"
+  },
+  {
+   "fieldname": "area",
+   "fieldtype": "Data",
+   "label": "Area  in sqft"
+  },
+  {
+   "fieldname": "section_break_lgwfh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "wifi",
+   "fieldtype": "Check",
+   "label": "Wifi"
+  },
+  {
+   "default": "0",
+   "fieldname": "parking",
+   "fieldtype": "Check",
+   "label": "Parking"
+  },
+  {
+   "fieldname": "facilities",
+   "fieldtype": "Table",
+   "label": "Facilities",
+   "options": "Hall Amenities"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Hall Type"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-11-01 16:11:41.084980",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Hall Type",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "hall_name"
+}

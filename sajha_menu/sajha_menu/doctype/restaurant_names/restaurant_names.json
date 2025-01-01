@@ -1,0 +1,169 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:restaurant_name",
+ "creation": "2023-07-17 16:02:33.202941",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "restaurant_name",
+  "naming_series",
+  "menu",
+  "floor",
+  "section_break_4",
+  "food_ip",
+  "column_break_gdwm",
+  "food_port",
+  "section_break_7",
+  "bar_ip",
+  "column_break_zeix",
+  "bar_port",
+  "section_break_10",
+  "counter_ip",
+  "column_break_hekk",
+  "counter_port",
+  "section_break_mxcr",
+  "estimate_ip",
+  "column_break_prrh",
+  "estimate_port"
+ ],
+ "fields": [
+  {
+   "fieldname": "restaurant_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Restaurant name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Naming Series",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_4",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "food_ip",
+   "fieldtype": "Data",
+   "label": "Food IP"
+  },
+  {
+   "default": "9100",
+   "fieldname": "food_port",
+   "fieldtype": "Int",
+   "label": "Food Port"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "bar_ip",
+   "fieldtype": "Data",
+   "label": "Bar IP"
+  },
+  {
+   "default": "9100",
+   "fieldname": "bar_port",
+   "fieldtype": "Int",
+   "label": "Bar Port"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "counter_ip",
+   "fieldtype": "Data",
+   "label": "Counter IP"
+  },
+  {
+   "default": "9100",
+   "fieldname": "counter_port",
+   "fieldtype": "Int",
+   "label": "Counter Port"
+  },
+  {
+   "fieldname": "menu",
+   "fieldtype": "Table",
+   "label": "Menu",
+   "options": "Menu Child"
+  },
+  {
+   "fieldname": "column_break_gdwm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_zeix",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_hekk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_mxcr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "estimate_ip",
+   "fieldtype": "Data",
+   "label": "Estimate IP"
+  },
+  {
+   "fieldname": "column_break_prrh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "9100",
+   "fieldname": "estimate_port",
+   "fieldtype": "Int",
+   "label": "Estimate Port"
+  },
+  {
+   "fieldname": "floor",
+   "fieldtype": "Table",
+   "label": "Floor",
+   "options": "Floor List"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-25 15:12:35.934881",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Restaurant names",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

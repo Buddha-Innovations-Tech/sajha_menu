@@ -1,0 +1,83 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:sub_category_name",
+ "creation": "2022-12-30 11:09:37.465520",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "todisplay",
+  "mobile_display",
+  "image",
+  "company",
+  "sub_category_name",
+  "ssc"
+ ],
+ "fields": [
+  {
+   "fieldname": "sub_category_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Sub category name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "todisplay",
+   "fieldtype": "Check",
+   "label": "To Display"
+  },
+  {
+   "fieldname": "ssc",
+   "fieldtype": "Table",
+   "label": "Super Sub Category",
+   "options": "Super Sub Category Child"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "mobile_display",
+   "fieldtype": "Check",
+   "label": "Mobile Display"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-05 12:10:53.684753",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Sub Category",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

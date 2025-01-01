@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "autoname": "format:Summary-{MM}-{DD}-{YYYY}-{#####}",
+ "creation": "2024-06-18 13:56:20.124052",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "section_break_wnbu",
+  "opening_datetime",
+  "column_break_jkrr",
+  "closing_datetime",
+  "section_break_ouhs",
+  "opening_amount",
+  "raw_data"
+ ],
+ "fields": [
+  {
+   "fieldname": "opening_datetime",
+   "fieldtype": "Datetime",
+   "label": "Opening Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "closing_datetime",
+   "fieldtype": "Datetime",
+   "label": "Closing Datetime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jkrr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ouhs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "opening_amount",
+   "fieldtype": "Currency",
+   "label": "Opening Amount",
+   "set_only_once": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "section_break_wnbu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "raw_data",
+   "fieldtype": "HTML Editor",
+   "label": "Raw Data",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-27 16:10:14.099459",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Cashier Summary",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

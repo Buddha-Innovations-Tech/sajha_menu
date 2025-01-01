@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2023-01-30 11:56:07.626954",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-04-06 13:19:50.653004",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "bar-order",
+ "owner": "Administrator",
+ "page_name": "bar-order",
+ "roles": [
+  {
+   "role": "Administrator"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Bar Order"
+}

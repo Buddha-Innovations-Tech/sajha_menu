@@ -1,0 +1,64 @@
+{{ include_style('style.bundle.css') }}
+
+<div id="body-main">
+    <div class="row kitchenOrders">
+        {% set url = frappe.get_url() %}
+        {% for bot in bots %}
+        <div class="col-3">
+            <a style="text-decoration: none" href="{{url}}/app/bar-orders/{{bot.bot_name}}">
+                <div class="kotWrapper">
+
+
+                    <div class="titleWrapper {{" kotCancelled" if bot.bot_status=="Cancelled" else ("kotDone" if
+                        bot.status=="Done" else ("kotPending" if bot.status=="Pending" else "kotProgress" ) ) }}">
+
+                        <div class="tableHeader ">
+
+
+
+                            <h3 class="">{{bot.name}}</h3>
+                            <div class="tableHeader-kotnum">BOT-id: {{bot.bot_number}}</div>
+
+
+                        </div>
+                        <div class="titleWrapper-status">
+                            {% if bot.bot_status == "Cancelled" %}
+                            Cancelled
+                            {% else %}
+                            {{
+                            "Pending" if bot.status == "Pending" else ("Done" if bot.status == "Done" else "In Process")
+                            }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="kotWrapper-total">
+                        <div class="kotWrapper-total-title">Total Orders</div>
+                        <div class="kotWrapper-total-count">{{bot.totalOrder}}</div>
+
+                    </div>
+                    <div class="kotWrapper-total">
+                        <div class="kotWrapper-total-title">Active Orders</div>
+                        <div class="kotWrapper-total-count"> {{bot.activeOrder}} </div>
+
+                    </div>
+
+                    <div class="kotWrapper-total">
+                        <div class="kotWrapper-total-title">Completed Orders</div>
+                        <div class="kotWrapper-total-count">{{bot.doneOrder}} </div>
+
+                    </div>
+
+                    {% if bot.bot_status == "Edited" %}
+                    <div class="edited">edited</div>
+                    {% else %}
+                    <div class="edited">.</div>
+                    {% endif %}
+                </div>
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+
+</div>
+</div>

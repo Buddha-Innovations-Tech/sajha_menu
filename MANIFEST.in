@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include sajha_menu *.css
+recursive-include sajha_menu *.csv
+recursive-include sajha_menu *.html
+recursive-include sajha_menu *.ico
+recursive-include sajha_menu *.js
+recursive-include sajha_menu *.json
+recursive-include sajha_menu *.md
+recursive-include sajha_menu *.png
+recursive-include sajha_menu *.py
+recursive-include sajha_menu *.svg
+recursive-include sajha_menu *.txt
+recursive-exclude sajha_menu *.pyc

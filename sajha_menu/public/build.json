@@ -1,0 +1,7 @@
+{
+    "css/sajha_menu.css": [
+        "public/css/sajha_menu.css",
+        "public/css/style.bundle.scss",
+        "public/css/style.bundle.css"
+    ]
+}

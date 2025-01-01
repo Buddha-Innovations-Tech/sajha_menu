@@ -1,0 +1,226 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2023-06-13 16:26:27.661886",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "hall_of_choice",
+  "type_of_hall",
+  "customer",
+  "sales_invoice_reference",
+  "section_break_na3vz",
+  "book_from",
+  "book_till",
+  "total_no_days",
+  "section_break_cdkm3",
+  "rate",
+  "column_break_lc5ck",
+  "hall_package_provided",
+  "status",
+  "section_break_qvsc0",
+  "customer_email",
+  "column_break_ns8ik",
+  "customer_mobile_no",
+  "section_break_zvkh5",
+  "company",
+  "combo_meals_section",
+  "meal_packages",
+  "extra_services",
+  "column_break_9jxoc",
+  "total_advance_paid",
+  "column_break_gxvim",
+  "total_charges",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "HMS-RR-.YY.-",
+   "read_only": 1
+  },
+  {
+   "fieldname": "hall_of_choice",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Hall of choice",
+   "options": "Event Hall",
+   "reqd": 1
+  },
+  {
+   "fieldname": "type_of_hall",
+   "fieldtype": "Select",
+   "label": "Hall Type"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Bill to Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sales_invoice_reference",
+   "fieldtype": "Data",
+   "label": "Sales Invoice Reference",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_na3vz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "book_from",
+   "fieldtype": "Datetime",
+   "label": "Book from",
+   "reqd": 1
+  },
+  {
+   "fieldname": "book_till",
+   "fieldtype": "Datetime",
+   "label": "Book till",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_no_days",
+   "fieldtype": "Int",
+   "label": "Total  No Days"
+  },
+  {
+   "fieldname": "section_break_cdkm3",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Int",
+   "label": "Rate"
+  },
+  {
+   "fieldname": "column_break_lc5ck",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hall_package_provided",
+   "fieldtype": "Table",
+   "hidden": 1,
+   "label": "Hall Package Provided",
+   "options": "Hall Package"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Link",
+   "label": "Status",
+   "options": "Hall Folio Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_qvsc0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "customer_email",
+   "fieldtype": "Data",
+   "label": "Customer Email"
+  },
+  {
+   "fieldname": "column_break_ns8ik",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_mobile_no",
+   "fieldtype": "Data",
+   "label": "Customer Mobile No"
+  },
+  {
+   "fieldname": "section_break_zvkh5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "combo_meals_section",
+   "fieldtype": "Section Break",
+   "label": "Combo meals"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "meal_packages",
+   "fieldtype": "Table",
+   "label": "Meal packages",
+   "options": "Combo Meal"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "extra_services",
+   "fieldtype": "Table",
+   "label": "Extra services",
+   "options": "Extra services"
+  },
+  {
+   "fieldname": "column_break_9jxoc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_advance_paid",
+   "fieldtype": "Float",
+   "label": "Advance against Reservation"
+  },
+  {
+   "fieldname": "column_break_gxvim",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_charges",
+   "fieldtype": "Currency",
+   "label": "Total Charges"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hall Folio",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-11-01 16:19:27.144851",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Hall Folio",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

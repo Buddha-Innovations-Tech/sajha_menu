@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:floor_name",
+ "creation": "2024-04-25 15:02:07.082573",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "outlet_name",
+  "floor_name",
+  "section_break_xmnx",
+  "table_list"
+ ],
+ "fields": [
+  {
+   "fieldname": "floor_name",
+   "fieldtype": "Data",
+   "label": "Floor Name",
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_xmnx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_list",
+   "fieldtype": "Table",
+   "label": "Table List",
+   "options": "Floor Tables"
+  },
+  {
+   "fieldname": "outlet_name",
+   "fieldtype": "Link",
+   "label": "Outlet Name",
+   "options": "Restaurant names"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-26 11:46:14.114973",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Floor Plan",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,63 @@
+{{ include_style('style.bundle.css') }}
+
+<div id="body-main">
+    <div class="row kitchenOrders">
+        {% set url = frappe.get_url() %}
+        {% for kot in kots %}
+        <div class="col-3">
+            <a style="text-decoration: none" href="{{url}}/app/kitchen-orders/{{kot.kot_name}}">
+                <div class="kotWrapper">
+
+                    <div class="titleWrapper {{" kotCancelled" if kot.kot_status=="Cancelled" else ("kotDone" if
+                        kot.status=="Done" else ("kotPending" if kot.status=="Pending" else "kotProgress" ) ) }}">
+
+                        <div class="tableHeader ">
+
+
+
+                            <h3 class="">{{kot.name}}</h3>
+                            <div class="tableHeader-kotnum">Kot-id: {{kot.kot_number}}</div>
+
+
+                        </div>
+                        <div class="titleWrapper-status">
+                            {% if kot.kot_status == "Cancelled" %}
+                            Cancelled
+                            {% else %}
+                            {{
+                            "Pending" if kot.status == "Pending" else ("Done" if kot.status == "Done" else "InProcess")
+                            }}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="kotWrapper-total">
+                        <div class="kotWrapper-total-title">Total Orders</div>
+                        <div class="kotWrapper-total-count">{{kot.totalOrder}}</div>
+
+                    </div>
+                    <div class="kotWrapper-total">
+                        <div class="kotWrapper-total-title">Active Orders</div>
+                        <div class="kotWrapper-total-count"> {{kot.activeOrder}} </div>
+
+                    </div>
+
+                    <div class="kotWrapper-total">
+                        <div class="kotWrapper-total-title">Completed Orders</div>
+                        <div class="kotWrapper-total-count">{{kot.doneOrder}} </div>
+
+                    </div>
+
+                    {% if kot.kot_status == "Edited" %}
+                    <div class="edited">edited</div>
+                    {% else %}
+                    <div class="edited">.</div>
+                    {% endif %}
+                </div>
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+
+</div>
+</div>

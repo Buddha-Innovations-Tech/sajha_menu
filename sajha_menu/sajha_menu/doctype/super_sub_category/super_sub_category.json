@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:ssc_name",
+ "creation": "2023-01-22 12:40:23.733863",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "todisplay",
+  "mobile_display",
+  "image",
+  "company",
+  "ssc_name",
+  "item_category"
+ ],
+ "fields": [
+  {
+   "fieldname": "ssc_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Super Sub Category Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "item_category",
+   "fieldtype": "Table",
+   "label": "Item Category",
+   "options": "Item Category Child",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "todisplay",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "To Display"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "Image",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "mobile_display",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Mobile Display"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-05 12:06:37.415657",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Super Sub Category",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

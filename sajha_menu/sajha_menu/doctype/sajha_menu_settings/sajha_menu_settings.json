@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-09 10:10:03.840629",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tuna_enable",
+  "usb_print",
+  "single_draft",
+  "estimate_enabled",
+  "sales_order",
+  "enable_opening",
+  "enable_walk_in_discount",
+  "maximum_discount",
+  "ird_print_name",
+  "enable_crm_discount",
+  "ssid_map",
+  "enabled",
+  "ssid_list"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "fieldname": "tuna_enable",
+   "fieldtype": "Check",
+   "label": "Tuna HMS enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "single_draft",
+   "fieldtype": "Check",
+   "label": "Single Draft"
+  },
+  {
+   "default": "0",
+   "fieldname": "usb_print",
+   "fieldtype": "Check",
+   "label": "USB Ticket Print"
+  },
+  {
+   "fieldname": "ssid_map",
+   "fieldtype": "Section Break",
+   "label": "SSID map"
+  },
+  {
+   "fieldname": "ssid_list",
+   "fieldtype": "Table",
+   "label": "SSID List",
+   "options": "SSID Map"
+  },
+  {
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "default": "0",
+   "fieldname": "estimate_enabled",
+   "fieldtype": "Check",
+   "label": "Estimate Enabled"
+  },
+  {
+   "fieldname": "maximum_discount",
+   "fieldtype": "Int",
+   "label": "Maximum Discount(%)",
+   "non_negative": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "sales_order",
+   "fieldtype": "Check",
+   "label": "Sales Order"
+  },
+  {
+   "fieldname": "ird_print_name",
+   "fieldtype": "Data",
+   "label": "IRD print Name"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_opening",
+   "fieldtype": "Check",
+   "label": "Enable Opening"
+  },
+  {
+   "default": "1",
+   "fieldname": "enable_walk_in_discount",
+   "fieldtype": "Check",
+   "label": "Enable Walk-in Customer discount"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_crm_discount",
+   "fieldtype": "Check",
+   "label": "Enable CRM Discount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-11-19 17:50:09.603658",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Sajha Menu Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

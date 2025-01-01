@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-12-30 11:16:39.365820",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "todisplay",
+  "mobile_display",
+  "item_code",
+  "item_name",
+  "section_break1",
+  "rate",
+  "tax",
+  "display_name",
+  "hotel_special",
+  "parent_name",
+  "company",
+  "description"
+ ],
+ "fields": [
+  {
+   "bold": 1,
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "item",
+   "options": "Item",
+   "search_index": 1
+  },
+  {
+   "fieldname": "section_break1",
+   "fieldtype": "Section Break"
+  },
+  {
+   "bold": 1,
+   "default": "0.00",
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rate",
+   "options": "currency"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "todisplay",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "To Display"
+  },
+  {
+   "default": "0",
+   "fieldname": "hotel_special",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Hotel Special"
+  },
+  {
+   "fieldname": "display_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Display name"
+  },
+  {
+   "fieldname": "tax",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Tax",
+   "read_only": 1
+  },
+  {
+   "fieldname": "parent_name",
+   "fieldtype": "Data",
+   "label": "Parent Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Data",
+   "label": "Description"
+  },
+  {
+   "default": "1",
+   "fieldname": "mobile_display",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Mobile Display"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-08-05 12:08:22.525621",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "Sub Category Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

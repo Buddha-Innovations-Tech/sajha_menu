@@ -1,0 +1,34 @@
+{{ include_style('style.bundle.css') }}
+
+<div class="widget-group box-primary-lighter" id="body-main" style="padding-top: 20px;">
+    {% set url = frappe.get_url() %}
+    <div class="widget-group-body grid-col-3">
+        {% for table in tables %}
+        <a style="text-decoration: none;" href="{{url}}/app/tables/{{table.name}}">
+            <div class="widget widget-shadow  shortcut-widget-box" data-widget-name=`{{table.name}}`>
+                <div class="widget-head test">
+                    <div class="widget-label">
+                        <div class="widget-titles">
+                            <span class="ellipsis" title="Employee">{{table.name}}</span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="widget-body test">
+                    <div class="widget-control">
+                        <div class="indicator-pill ellipsis blue">Current order: {{table.currentOrder}}</div>
+                    </div>
+                    <br />
+                    <div class="widget-control">
+                        <div class="indicator-pill ellipsis blue">Billable order: {{table.totalOrder}}</div>
+                    </div>
+
+                </div>
+                <div class="widget-footer">
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>

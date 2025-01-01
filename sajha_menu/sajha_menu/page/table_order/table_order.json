@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2023-03-08 11:35:34.613954",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-03-20 14:59:54.483893",
+ "modified_by": "Administrator",
+ "module": "Sajha Menu",
+ "name": "table-order",
+ "owner": "Administrator",
+ "page_name": "table-order",
+ "roles": [
+  {
+   "role": "Receptionist"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Tables"
+}
