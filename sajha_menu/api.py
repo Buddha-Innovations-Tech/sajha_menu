@@ -3481,58 +3481,62 @@ Note:
 """
 @frappe.whitelist()
 def insert_customer(address_line1, customer_territory, city, country, customer_group, customer_name, type, mobile_no, address_line2="", state="", email="", pan="", zip=""):
-	c_doc = frappe.get_doc({
-		"doctype": "Customer",
-		"customer_name": customer_name,
-		"customer_group": customer_group,
-		"territory": customer_territory,
-		"customer_type": type,
-		"mobile_no": mobile_no,
-		"pan": pan
-	})
-	c_doc.insert()
+	exists = frappe.db.get_value("Customer", {"mobile_no": mobile_no},'name')
+	if exists is not None:
+		c_doc = frappe.get_doc({
+			"doctype": "Customer",
+			"customer_name": customer_name,
+			"customer_group": customer_group,
+			"territory": customer_territory,
+			"customer_type": type,
+			"mobile_no": mobile_no,
+			"pan": pan
+		})
+		c_doc.insert()
 
-	contact = frappe.db.get_value(
-		"Contact", f"{c_doc.name}-{c_doc.name}", "name")
-	if contact != None:
-		contactData = frappe.get_doc(
-			"Contact", f"{c_doc.name}-{c_doc.name}")
+		contact = frappe.db.get_value(
+			"Contact", f"{c_doc.name}-{c_doc.name}", "name")
+		if contact != None:
+			contactData = frappe.get_doc(
+				"Contact", f"{c_doc.name}-{c_doc.name}")
 
 
-		contactData.email_id = email if contactData.email_id == None else contactData.email_id
-		contactData.address1 = address_line1 if (contactData.address1 == None) or (
-			contactData.address1 == "placeholder") else contactData.address1
-		contactData.address2 = address_line2 if contactData.address2 == None else contactData.address2
-		contactData.city = city if contactData.city == None else contactData.city
-		contactData.state = state if contactData.state == None else contactData.state
-		contactData.country = country if (contactData.country == None) or (
-			contactData.country == "placeholder") else contactData.country
-		contactData.postal_code = zip if contactData.postal_code == None else contactData.postal_code
-		contactData.save()
+			contactData.email_id = email if contactData.email_id == None else contactData.email_id
+			contactData.address1 = address_line1 if (contactData.address1 == None) or (
+				contactData.address1 == "placeholder") else contactData.address1
+			contactData.address2 = address_line2 if contactData.address2 == None else contactData.address2
+			contactData.city = city if contactData.city == None else contactData.city
+			contactData.state = state if contactData.state == None else contactData.state
+			contactData.country = country if (contactData.country == None) or (
+				contactData.country == "placeholder") else contactData.country
+			contactData.postal_code = zip if contactData.postal_code == None else contactData.postal_code
+			contactData.save()
+		else:
+			doc = frappe.new_doc("Contact")
+			doc.first_name = c_doc.name
+			doc.email_id = email
+			doc.address1 = address_line1
+			doc.address2 = address_line2
+			doc.city = city
+			doc.state = state
+			doc.country = country
+			doc.postal_code = zip
+
+			if (mobile_no != ""):
+				contact_item = doc.append("phone_nos", {})
+				contact_item.phone = mobile_no
+				contact_item.is_primary_mobile_no = 1
+				contact_item.is_primary_phone = 1
+
+			customer_ref = doc.append("links", {})
+			customer_ref.link_doctype = "Customer"
+			customer_ref.link_name = customer_name
+			doc.save()
+
+		return True
 	else:
-		doc = frappe.new_doc("Contact")
-		doc.first_name = c_doc.name
-		doc.email_id = email
-		doc.address1 = address_line1
-		doc.address2 = address_line2
-		doc.city = city
-		doc.state = state
-		doc.country = country
-		doc.postal_code = zip
-
-		if (mobile_no != ""):
-			contact_item = doc.append("phone_nos", {})
-			contact_item.phone = mobile_no
-			contact_item.is_primary_mobile_no = 1
-			contact_item.is_primary_phone = 1
-
-		customer_ref = doc.append("links", {})
-		customer_ref.link_doctype = "Customer"
-		customer_ref.link_name = customer_name
-		doc.save()
-
-	return True
-
+		frappe.throw("Customer already exists")
+		return
 
 
 
@@ -3566,7 +3570,7 @@ def cancelOrder(orderId):
 	email = frappe.session.user
 
 	doc = frappe.get_doc("Home Delivery Orders", orderId,
-						 ignore_permissions=True)
+							ignore_permissions=True)
 
 	if doc != None:
 		if doc.email == email:
@@ -4226,7 +4230,7 @@ def get_table_kot_bot(table):
 				data.append({"item_code": ko.item_code, 'quantity': ko.quantity,
 							'item_name': frappe.db.get_value("Item", ko.item_code, "item_name")})
 			kot_bot.append({"ID": order.ticket_name,"table":ord.table_name, "owner": order.owner, "number": order.ticket_number, "itemCategory": "KOT",
-						   "order": data, "time": datetime.strftime(ko.creation, "%H:%M"), "remark": f"{ord.remark}"})
+						"order": data, "time": datetime.strftime(ko.creation, "%H:%M"), "remark": f"{ord.remark}"})
 		else:
 			ord = frappe.get_doc("Bar Orders", order.ticket_name)
 			data = []
@@ -4234,7 +4238,7 @@ def get_table_kot_bot(table):
 				data.append({"item_code": ko.item_code, 'quantity': ko.quantity,
 							'item_name': frappe.db.get_value("Item", ko.item_code, "item_name")})
 			kot_bot.append({"ID": order.ticket_name, "table":ord.table_name, "owner": order.owner, "number": order.ticket_number, "itemCategory": "BOT",
-						   "order": data, "time": datetime.strftime(ko.creation, "%H:%M"), "remark": f"{ord.remark}"})
+						"order": data, "time": datetime.strftime(ko.creation, "%H:%M"), "remark": f"{ord.remark}"})
 	return kot_bot
 
 """
@@ -4354,7 +4358,6 @@ def check_opening_shift():
 	else:
 		return "Cashier Summary Disabled"
 
-
 @frappe.whitelist()
 def open_shift(amount):
 	try:
@@ -4461,8 +4464,6 @@ def get_invoice_details_cashier(opening, closing, company):
 						s_data['other_collection']+= item.allocated_amount
 	return(s_data)
 
-
-
 @frappe.whitelist()
 def check_cashier_report():
 	try:
@@ -4543,7 +4544,6 @@ def close_register():
 	except Exception as e:
 		frappe.log_error(frappe.get_traceback(), f"{e}")
 		return False
-
 
 @frappe.whitelist()
 def sajha_notification_count():
