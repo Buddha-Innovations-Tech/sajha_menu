@@ -1,209 +1,191 @@
 {
- "actions": [],
- "allow_rename": 1,
- "autoname": "field:table_name",
- "creation": "2022-12-30 15:45:50.135104",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "enabled",
-  "section_break_ztpo",
-  "table_name",
-  "restaurant_names",
-  "tab_name",
-  "column_break_ecax",
-  "company",
-  "category",
-  "section_break_gdyb",
-  "current_orders",
-  "total_order_section",
-  "orders",
-  "split_bill",
-  "split_bill_customer",
-  "move_to_room",
-  "room_number",
-  "room_folio",
-  "room_customer",
-  "move_to",
-  "kot_bot",
-  "total_charges",
-  "merged_tables"
- ],
- "fields": [
-  {
-   "fieldname": "table_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Table Code",
-   "reqd": 1,
-   "unique": 1
-  },
-  {
-   "fieldname": "company",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Company",
-   "options": "Company",
-   "reqd": 1
-  },
-  {
-   "default": "Table",
-   "fieldname": "category",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Category",
-   "options": "Table\nRoom",
-   "set_only_once": 1
-  },
-  {
-   "collapsible": 1,
-   "fieldname": "total_order_section",
-   "fieldtype": "Section Break",
-   "label": "Total Order"
-  },
-  {
-   "fieldname": "orders",
-   "fieldtype": "Table",
-   "label": "Orders",
-   "options": "Total Order"
-  },
-  {
-   "fieldname": "current_orders",
-   "fieldtype": "Table",
-   "label": "Current Orders",
-   "options": "Current Orders",
-   "read_only": 1
-  },
-  {
-   "default": "0",
-   "fieldname": "split_bill",
-   "fieldtype": "Check",
-   "label": "Split Bill"
-  },
-  {
-   "default": "0",
-   "fieldname": "total_charges",
-   "fieldtype": "Currency",
-   "label": "Total Charge",
-   "non_negative": 1,
-   "read_only": 1
-  },
-  {
-   "fieldname": "split_bill_customer",
-   "fieldtype": "Table",
-   "hidden": 1,
-   "label": "Split Bill  Customer",
-   "options": "Split Bill"
-  },
-  {
-   "default": "0",
-   "fieldname": "move_to_room",
-   "fieldtype": "Check",
-   "label": "Move to room"
-  },
-  {
-   "fieldname": "room_folio",
-   "fieldtype": "Link",
-   "label": "Room Folio",
-   "options": "Room Folio HMS"
-  },
-  {
-   "fieldname": "move_to",
-   "fieldtype": "Button",
-   "label": "Move"
-  },
-  {
-   "fieldname": "room_number",
-   "fieldtype": "Link",
-   "label": "Room Number",
-   "options": "Room HMS"
-  },
-  {
-   "fieldname": "room_customer",
-   "fieldtype": "Select",
-   "label": "Room Customer"
-  },
-  {
-   "fieldname": "restaurant_names",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Restaurant name",
-   "options": "Restaurant names",
-   "reqd": 1
-  },
-  {
-   "fieldname": "kot_bot",
-   "fieldtype": "Table",
-   "label": "KOT_BOT",
-   "options": "KOT_BOT"
-  },
-  {
-   "default": "0",
-   "fieldname": "enabled",
-   "fieldtype": "Check",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Enabled"
-  },
-  {
-   "fieldname": "merged_tables",
-   "fieldtype": "Data",
-   "label": "Merged Tables"
-  },
-  {
-   "fieldname": "section_break_gdyb",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "section_break_ztpo",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "tab_name",
-   "fieldtype": "Data",
-   "label": "Table Name"
-  },
-  {
-   "fieldname": "column_break_ecax",
-   "fieldtype": "Column Break"
-  }
- ],
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-12-31 14:24:47.256089",
- "modified_by": "Administrator",
- "module": "Sajha Menu",
- "name": "Tables",
- "naming_rule": "By fieldname",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Reception",
-   "share": 1,
-   "write": 1
-  }
- ],
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": [],
- "track_changes": 1
-}
+  "actions": [],
+  "autoname": "field:table_name",
+  "creation": "2022-12-30 15:45:50.135104",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+   "enabled",
+   "section_break_ztpo",
+   "table_name",
+   "restaurant_names",
+   "tab_name",
+   "column_break_ecax",
+   "company",
+   "category",
+   "section_break_gdyb",
+   "current_orders",
+   "total_order_section",
+   "orders",
+   "kot_bot",
+   "total_charges",
+   "merged_tables"
+  ],
+  "fields": [
+   {
+    "fieldname": "table_name",
+    "fieldtype": "Data",
+    "in_list_view": 1,
+    "label": "Table Code",
+    "reqd": 1,
+    "unique": 1
+   },
+   {
+    "fieldname": "company",
+    "fieldtype": "Link",
+    "in_list_view": 1,
+    "label": "Company",
+    "options": "Company",
+    "reqd": 1
+   },
+   {
+    "default": "Table",
+    "fieldname": "category",
+    "fieldtype": "Select",
+    "in_list_view": 1,
+    "label": "Category",
+    "options": "Table\nRoom",
+    "set_only_once": 1
+   },
+   {
+    "collapsible": 1,
+    "fieldname": "total_order_section",
+    "fieldtype": "Section Break",
+    "label": "Total Order"
+   },
+   {
+    "fieldname": "orders",
+    "fieldtype": "Table",
+    "label": "Orders",
+    "options": "Total Order"
+   },
+   {
+    "fieldname": "current_orders",
+    "fieldtype": "Table",
+    "label": "Current Orders",
+    "options": "Current Orders"
+   },
+   {
+    "default": "0",
+    "fieldname": "total_charges",
+    "fieldtype": "Currency",
+    "label": "Total Charge",
+    "non_negative": 1,
+    "read_only": 1
+   },
+   {
+    "fieldname": "restaurant_names",
+    "fieldtype": "Link",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "label": "Restaurant name",
+    "options": "Restaurant names",
+    "reqd": 1
+   },
+   {
+    "fieldname": "kot_bot",
+    "fieldtype": "Table",
+    "label": "KOT_BOT",
+    "options": "KOT_BOT",
+    "read_only": 1
+   },
+   {
+    "default": "0",
+    "fieldname": "enabled",
+    "fieldtype": "Check",
+    "in_list_view": 1,
+    "in_standard_filter": 1,
+    "label": "Enabled"
+   },
+   {
+    "fieldname": "merged_tables",
+    "fieldtype": "Data",
+    "label": "Merged Tables",
+    "read_only": 1
+   },
+   {
+    "fieldname": "section_break_gdyb",
+    "fieldtype": "Section Break"
+   },
+   {
+    "fieldname": "section_break_ztpo",
+    "fieldtype": "Section Break"
+   },
+   {
+    "fieldname": "tab_name",
+    "fieldtype": "Data",
+    "label": "Table Name"
+   },
+   {
+    "fieldname": "column_break_ecax",
+    "fieldtype": "Column Break"
+   }
+  ],
+  "index_web_pages_for_search": 1,
+  "links": [],
+  "modified": "2025-01-01 15:04:36.649626",
+  "modified_by": "Administrator",
+  "module": "Sajha Menu",
+  "name": "Tables",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+   {
+    "create": 1,
+    "delete": 1,
+    "email": 1,
+    "export": 1,
+    "print": 1,
+    "read": 1,
+    "report": 1,
+    "role": "System Manager",
+    "share": 1,
+    "write": 1
+   },
+   {
+    "create": 1,
+    "email": 1,
+    "export": 1,
+    "print": 1,
+    "read": 1,
+    "report": 1,
+    "role": "Sajha Front",
+    "share": 1,
+    "write": 1
+   },
+   {
+    "email": 1,
+    "export": 1,
+    "print": 1,
+    "read": 1,
+    "report": 1,
+    "role": "Guest",
+    "share": 1
+   },
+   {
+    "email": 1,
+    "export": 1,
+    "print": 1,
+    "read": 1,
+    "report": 1,
+    "role": "Waiter",
+    "share": 1
+   },
+   {
+    "create": 1,
+    "email": 1,
+    "export": 1,
+    "print": 1,
+    "read": 1,
+    "report": 1,
+    "role": "IT Support",
+    "select": 1,
+    "share": 1,
+    "write": 1
+   }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "states": []
+ }
