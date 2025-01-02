@@ -3480,8 +3480,7 @@ Note:
 """
 @frappe.whitelist()
 def insert_customer(address_line1, customer_territory, city, country, customer_group, customer_name, type, mobile_no, address_line2="", state="", email="", pan="", zip=""):
-	exists = frappe.db.get_value("Customer", {"mobile_no": mobile_no},'name')
-	if exists is not None:
+
 		c_doc = frappe.get_doc({
 			"doctype": "Customer",
 			"customer_name": customer_name,
@@ -3533,9 +3532,7 @@ def insert_customer(address_line1, customer_territory, city, country, customer_g
 			doc.save()
 
 		return True
-	else:
-		frappe.throw("Customer already exists")
-		return
+
 
 
 
