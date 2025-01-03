@@ -133,8 +133,6 @@ def is_walk_in_enable():
 	return frappe.db.get_single_value("Sajha Menu Settings", "enable_walk_in_discount")
 
 
-# push_service = FCMNotification(
-# 	api_key="AAAAOmBmb8A:APA91bH6HNgoPBvigMveMSN9HCj7EpQCOPsz5ERnaUeBpND1gT2nRhUZWCzIzlm15ce8kRMr2UGUXkwlTZkjfXsKngagcsbhD8mJ9xTsJltc4-CveOr60nUoYRltMidkIwA_Lg09xRXM")
 
 # Register
 
