@@ -203,8 +203,6 @@ def sign_up(email, full_name, password, mobile_no, location):
 				http_status_code=429,
 			)
 
-
-
 		user = frappe.get_doc(
 			{
 				"doctype": "User",
