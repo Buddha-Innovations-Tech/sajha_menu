@@ -21,21 +21,6 @@ import socketio
 
 import base64
 
-
-# Create a SocketIO client
-# sio = socketio.Client()
-
-# Connect to the socket server
-# sio.connect('https://testsocket.tuna-erp.com')
-# sio.connect('http://localhost:5400')
-
-
-# @frappe.whitelist(allow_guest=True)
-# def emit_message_check():
-#     sio.emit("Y2K_sajha_menu", 'Hello from python buddy!')
-#     return "done"
-
-
 # Login
 
 """
