@@ -17,7 +17,7 @@ app_license = "MIT"
 app_include_css = "/assets/css/sajha_menu.css"
 # app_include_js = "/assets/sajha_menu/js/sajha_menu.js"
 
-app_include_js = "/assets/sajha_menu/js/desk.js"
+# app_include_js = "/assets/sajha_menu/js/desk.js"
 
 
 # include js, css files in header of web template
