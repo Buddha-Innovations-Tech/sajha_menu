@@ -2528,6 +2528,7 @@ def createSalesInvoicePOS(company, customer,multi_payment, createLateSales, writ
 				sales_charges = sales_order.append('taxes', {})
 				sales_charges.charge_type = "On Net Total"
 				sales_charges.account_head = f"VAT - {company_sales.abbr}"
+				sales_charges.description = "VAT"
 				kot_bot = table.get("kot_bot")
 
 				for ko in kot_bot:
