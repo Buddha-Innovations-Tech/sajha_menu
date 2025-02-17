@@ -71,6 +71,8 @@
         <p>Sajha Menu Loading...</p>
       </div>
     </div>
-    
+    <script>
+      window.csrf_token = '{{ frappe.session.csrf_token }}';
+    </script>
   </body>
 </html>
