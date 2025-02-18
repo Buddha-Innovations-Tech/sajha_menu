@@ -2606,7 +2606,7 @@ def createSalesInvoicePOS(company, customer,multi_payment, createLateSales, writ
 				sales_charges = sales_invoice.append('taxes', {})
 				sales_charges.charge_type = "On Net Total"
 				sales_charges.account_head = f"VAT - {company.abbr}"
-
+				sales_charges.description = "VAT"
 				restaurantName = frappe.get_doc(
 					"Restaurant names", table.get("restaurant_names"))
 				sales_invoice.naming_series = restaurantName.naming_series
